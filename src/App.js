@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Dropdown from  "./Dropdown";
 
@@ -18,11 +18,23 @@ const items = [
 ];
 
 function App() {
+
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  function handleDropdownSelection(newValue) {
+    setSelectedItems(newValue);
+  }
+
   return (
     <div className="container">
-      <div className="shit">
+      <div className="movie">
         <h1>Topics</h1>
-        <Dropdown title="Select movie" items={items} multiSelect/>
+        <Dropdown title="Select movie" items={items} onSelect={handleDropdownSelection}/>
+        {
+          selectedItems.map((x) => (
+          <h1 key={x.id}>{x.value}</h1>
+          ))
+        }
       </div>
     </div>
   );

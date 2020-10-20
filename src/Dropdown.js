@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import onClickOutside from 'react-onclickoutside';
 
-function Dropdown({ title, items, multiSelect = false }) {
+function Dropdown({ title, items, multiSelect = false, onSelect}) {
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
   const toggle = () => setOpen(!open);
@@ -11,8 +11,12 @@ function Dropdown({ title, items, multiSelect = false }) {
     if (!selection.some(current => current.id === item.id)) {
       if (!multiSelect) {
         setSelection([item]);
+        // console.log("2", onSelect);
+        ;onSelect([item]);
       } else if (multiSelect) {
         setSelection([...selection, item]);
+        onSelect([...selection, item]);
+        // console.log("2", onSelect);
       }
     } else {
       let selectionAfterRemoval = selection;
@@ -20,6 +24,8 @@ function Dropdown({ title, items, multiSelect = false }) {
         current => current.id !== item.id
       );
       setSelection([...selectionAfterRemoval]);
+      // console.log("1", onSelect);
+      onSelect([...selectionAfterRemoval]);
     }
   }
 
