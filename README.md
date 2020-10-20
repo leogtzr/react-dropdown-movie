@@ -1,4 +1,4 @@
-# react-dropdown usage
+# dropdown selection in React
 
 ![img1](images/dropdown1.png)
 
